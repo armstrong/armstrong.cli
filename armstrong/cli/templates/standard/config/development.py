@@ -1,3 +1,4 @@
+# Development settings for {{ project_name }}
 from config.defaults import *
 
 DEBUG = True

@@ -1,3 +1,4 @@
+# Production settings for {{ project_name }}
 from config.defaults import *
 
 DEBUG = False

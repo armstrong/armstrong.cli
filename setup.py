@@ -35,7 +35,6 @@ def build_package(dirpath, dirnames, filenames):
 [build_package(dirpath, dirnames, filenames) for dirpath, dirnames, filenames
         in os.walk('armstrong/cli')]
 
-
 setup(
     name='armstrong.cli',
     version='0.0.1.alpha.0',
@@ -43,6 +42,11 @@ setup(
     author='Bay Citizen & Texas Tribune',
     author_email='dev@armstrongcms.org',
     url='http://github.com/armstrongcms/armstrong.cli/',
+    entry_points = {
+        "console_scripts": [
+            "armstrong = armstrong.cli.main:main",
+        ],
+    },
     packages=packages,
     package_data={
         "armstrong": data_files,

@@ -1,3 +1,4 @@
+# Simple wsgi file for {{ project_name }}
 import os
 import sys
 
