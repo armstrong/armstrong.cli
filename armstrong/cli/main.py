@@ -41,7 +41,6 @@ def init():
             lambda x: x.endswith(".pyc") is False,
             (glob.glob("%s/*" % template_dir) 
              + glob.glob("%s/*/*" % template_dir)))
-    print source_files
 
     existing_files = []
     files = []
@@ -78,7 +77,6 @@ def init():
             os.mkdir(dest)
         else:
             # upgrade this to with statements as soon as 2.7 is ok as a dep
-            print "reading %s" % source
             f = codecs.open(source, "r", "utf-8")
             out = Template(f.read()).render(context)
             f.close()
