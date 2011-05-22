@@ -56,10 +56,6 @@ def init():
             # Ignore this file, it's just here so this gets picked up
             continue
         new_file = file.replace(template_dir, path)
-        if file.endswith(".txt.py"):
-            # Strip out the final .py -- it's there to make sure we know where
-            # the file is included in a location alongside our project.
-            new_file = new_file.replace(".py", "")
 
         files.append((file, new_file))
         if os.path.exists(new_file):
