@@ -112,13 +112,14 @@ def in_armstrong_project():
 
 
 def main():
-    if len(sys.argv) < 2:
+    if len(sys.argv) < 2 and not in_armstrong_project():
         usage()
         sys.exit(0)
 
-    subcommand = sys.argv[1]
-    if subcommand in ARMSTRONG_COMMANDS:
-        sys.exit(ARMSTRONG_COMMANDS[subcommand]())
+    if len(sys.argv) >= 2:
+        subcommand = sys.argv[1]
+        if subcommand in ARMSTRONG_COMMANDS:
+            sys.exit(ARMSTRONG_COMMANDS[subcommand]())
 
     # are we in an armstrong project?
     if in_armstrong_project():
