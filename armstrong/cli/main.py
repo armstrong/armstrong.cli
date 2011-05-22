@@ -113,3 +113,26 @@ def main():
     subcommand = sys.argv[1]
     if subcommand in ARMSTRONG_COMMANDS:
         sys.exit(ARMSTRONG_COMMANDS[subcommand]())
+
+    # are we in an armstrong project?
+    cwd = os.getcwd()
+    if os.path.isdir(os.path.join(cwd, "config")):
+        # Make sure the current working dir is always in the path as the first
+        # element.  Initial tests on a Homebrew Python installation result in
+        # this not being the case.
+        if cwd not in sys.path:
+            sys.path.insert(0, cwd)
+
+        settings_module = "config.development"
+        if "--production" in sys.argv:
+            settings_module = "config.production"
+            del sys.argv[sys.argv["--production"]]
+
+        try:
+            __import__(settings_module, globals(), locals())
+            settings = sys.modules[settings_module]
+        except ImportError, e:
+            sys.stderr.write("Unable to import %s: %s" % (settings_module, e))
+            sys.exit(1)
+        from django.core.management import execute_manager
+        execute_manager(settings)
