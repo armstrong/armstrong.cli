@@ -1,0 +1,1 @@
+-e git://github.com/armstrongcms/armstrong.git#egg=armstrong
