@@ -1,5 +1,45 @@
+"""
+setup.py file for building armstrong components.
+
+Nothing in this file should need to be edited, please see accompanying
+package.json file if you need to adjust metadata about this package.
+"""
+
 from distutils.core import setup
+import json
 import os
+
+info = json.load(open("./package.json"))
+
+
+def convert_to_str(d):
+    """
+    Recursively convert all values in a dictionary to strings
+
+    This is required because setup() does not like unicode in
+    the values it is supplied.
+    """
+    for k, v in d.items():
+        if type(v) in [list, tuple]:
+            d[k] = [str(a) for a in v]
+        elif type(v) is dict:
+            d[k] = convert_to_str(v)
+        else:
+            d[k] = str(v)
+    return d
+
+info = convert_to_str(info)
+NAMESPACE_PACKAGES = []
+
+
+# TODO: simplify this process
+def generate_namespaces(package):
+    new_package = ".".join(package.split(".")[0:-1])
+    if new_package.count(".") > 0:
+        generate_namespaces(new_package)
+    NAMESPACE_PACKAGES.append(new_package)
+generate_namespaces(info["name"])
+
 
 if os.path.exists("MANIFEST"):
     os.unlink("MANIFEST")
@@ -24,7 +64,8 @@ def build_package(dirpath, dirnames, filenames):
             pkg = pkg.replace(os.path.altsep, '.')
         packages.append(pkg)
     elif filenames:
-        prefix = dirpath[10:]  # Strip "armstrong<dir separator>"
+        # Strip off the length of the package name plus the trailing slash
+        prefix = dirpath[len(info["name"]) + 1:]
         for f in filenames:
             # Ignore all dot files and any compiled
             if f.startswith(".") or f.endswith(".pyc"):
@@ -33,27 +74,17 @@ def build_package(dirpath, dirnames, filenames):
 
 
 [build_package(dirpath, dirnames, filenames) for dirpath, dirnames, filenames
-        in os.walk('armstrong/cli')]
+        in os.walk(info["name"].replace(".", "/"))]
 
-setup(
-    name='armstrong.cli',
-    version='0.1.0.alpha.0',
-    description='Provides basic commands needed for Armstrong scaffolding',
-    author='Bay Citizen & Texas Tribune',
-    author_email='dev@armstrongcms.org',
-    url='http://github.com/armstrongcms/armstrong.cli/',
-    entry_points = {
-        "console_scripts": [
-            "armstrong = armstrong.cli.main:main",
-        ],
-    },
-    packages=packages,
-    package_data={
-        "armstrong": data_files,
-        "": ["README.rst", ],
-    },
-    namespace_packages=["armstrong", "armstrong.cli", ],
-    classifiers=[
+setup_kwargs = {
+    "author": "Bay Citizen & Texas Tribune",
+    "author_email": "dev@armstrongcms.org",
+    "url": "http://github.com/armstrongcms/%s/" % info["name"],
+    "entry_points": [],
+    "packages": packages,
+    "package_data": {info["name"]: data_files, },
+    "namespace_packages": NAMESPACE_PACKAGES,
+    "classifiers": [
         'Development Status :: 3 - Alpha',
         'Environment :: Web Environment',
         'Framework :: Django',
@@ -62,4 +93,9 @@ setup(
         'Operating System :: OS Independent',
         'Programming Language :: Python',
     ],
-)
+}
+
+setup_kwargs.update(info)
+print info
+print setup_kwargs["entry_points"]
+setup(**setup_kwargs)
