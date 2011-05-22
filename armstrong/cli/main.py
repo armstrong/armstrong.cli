@@ -9,6 +9,7 @@ CWD = os.getcwd()
 
 
 def init():
+    """Initial a new Armstrong project (armstrong init [path])"""
     # TODO: allow db to be configured from command line
     # TODO: interactive mode to ask questions for each variable
     from django.conf import settings
@@ -89,14 +90,19 @@ def init():
     print "armstrong initialized!"
 
 
-
 ARMSTRONG_COMMANDS = {
     "init": init
 }
 
 
 def usage():
-    subcommands = "  %s" % ("\n  ".join(ARMSTRONG_COMMANDS.keys()))
+    subcommands = []
+    for name, subcommand in ARMSTRONG_COMMANDS.items():
+        extra = ""
+        if hasattr(subcommand, "__doc__") and subcommand.__doc__:
+            extra = " - %s" % subcommand.__doc__
+        subcommands.append("  %s%s" % (name, extra))
+    subcommands = "  %s" % "\n  ".join(subcommands)
 
     help_msg = [
         "usage: armstrong <subcommand> <options>",
