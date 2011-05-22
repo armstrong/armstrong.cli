@@ -42,7 +42,7 @@ def init():
 
     source_files = filter(
             lambda x: x.endswith(".pyc") is False,
-            (glob.glob("%s/*" % template_dir) 
+            (glob.glob("%s/*" % template_dir)
              + glob.glob("%s/*/*" % template_dir)))
 
     existing_files = []
@@ -74,7 +74,7 @@ def init():
         ]
         sys.stderr.write("\n".join(output))
         return -1
-    
+
     for (source, dest) in files:
         if os.path.isdir(source):
             os.mkdir(dest)

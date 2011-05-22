@@ -22,4 +22,3 @@ urlpatterns = patterns('',
     # Comment the next line to disable the admin:
     url(r'^%s/' % ADMIN_BASE, include(admin.site.urls)),
 )
-

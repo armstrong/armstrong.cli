@@ -1,6 +1,7 @@
 # Django settings for {{ project_name }} project.
 import os
 
+
 def project_dir(*paths):
     base = os.path.realpath(os.path.join(os.path.dirname(__file__), '..'))
     return os.path.join(base, *paths)
@@ -98,7 +99,8 @@ MIDDLEWARE_CLASSES = (
 ROOT_URLCONF = 'config.urls'
 
 TEMPLATE_DIRS = (
-    # Put strings here, like "/home/html/django_templates" or "C:/www/django/templates".
+    # Put strings here, like "/home/html/django_templates" or
+    # "C:/www/django/templates".
     # Always use forward slashes, even on Windows.
     # Don't forget to use absolute paths, not relative paths.
     project_dir("templates")
@@ -139,4 +141,3 @@ LOGGING = {
         },
     }
 }
-
