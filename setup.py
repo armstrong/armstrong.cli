@@ -37,7 +37,7 @@ def build_package(dirpath, dirnames, filenames):
 
 setup(
     name='armstrong.cli',
-    version='0.0.1.alpha.0',
+    version='0.1.0.alpha.0',
     description='Provides basic commands needed for Armstrong scaffolding',
     author='Bay Citizen & Texas Tribune',
     author_email='dev@armstrongcms.org',
