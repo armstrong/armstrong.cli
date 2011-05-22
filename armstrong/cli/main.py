@@ -5,6 +5,8 @@ import sys
 
 # TODO: use logging throughout for output
 
+CWD = os.getcwd()
+
 
 def init():
     # TODO: allow db to be configured from command line
@@ -25,7 +27,7 @@ def init():
     if len(sys.argv) > 2:
         path = sys.argv[2]
     else:
-        path = os.getcwd()
+        path = CWD
 
     # TODO: allow this to be passed in via command line
     project_name = os.path.basename(path)
@@ -105,6 +107,10 @@ def usage():
     print "\n".join(help_msg)
 
 
+def in_armstrong_project():
+    return os.path.isdir(os.path.join(CWD, "config"))
+
+
 def main():
     if len(sys.argv) < 2:
         usage()
@@ -115,13 +121,12 @@ def main():
         sys.exit(ARMSTRONG_COMMANDS[subcommand]())
 
     # are we in an armstrong project?
-    cwd = os.getcwd()
-    if os.path.isdir(os.path.join(cwd, "config")):
+    if in_armstrong_project():
         # Make sure the current working dir is always in the path as the first
         # element.  Initial tests on a Homebrew Python installation result in
         # this not being the case.
-        if cwd not in sys.path:
-            sys.path.insert(0, cwd)
+        if CWD not in sys.path:
+            sys.path.insert(0, CWD)
 
         settings_module = "config.development"
         if "--production" in sys.argv:
