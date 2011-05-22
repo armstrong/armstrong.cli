@@ -117,6 +117,16 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Comment out the next line to disable admin documentation:
     'django.contrib.admindocs',
+
+    # Armstrong packages
+    'armstrong.core.arm_content',
+    'armstrong.core.arm_sections',
+    'armstrong.core.arm_wells',
+    'armstrong.apps.articles',
+    'armstrong.apps.content',
+
+    # Third-party apps that Armstrong requires
+    'reversion',
 )
 
 # A sample logging configuration. The only tangible logging
