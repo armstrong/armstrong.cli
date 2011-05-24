@@ -80,7 +80,6 @@ setup_kwargs = {
     "author": "Bay Citizen & Texas Tribune",
     "author_email": "dev@armstrongcms.org",
     "url": "http://github.com/armstrongcms/%s/" % info["name"],
-    "entry_points": [],
     "packages": packages,
     "package_data": {info["name"]: data_files, },
     "namespace_packages": NAMESPACE_PACKAGES,
