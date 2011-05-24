@@ -96,6 +96,4 @@ setup_kwargs = {
 }
 
 setup_kwargs.update(info)
-print info
-print setup_kwargs["entry_points"]
 setup(**setup_kwargs)
