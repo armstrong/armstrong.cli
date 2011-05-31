@@ -127,6 +127,7 @@ INSTALLED_APPS = (
 
     # Third-party apps that Armstrong requires
     'reversion',
+    'mptt',
 )
 
 # A sample logging configuration. The only tangible logging
