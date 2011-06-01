@@ -1,5 +1,5 @@
 from django.conf.urls.defaults import patterns, include, url
-from django.view.generic import TemplateView
+from django.views.generic import TemplateView
 
 # ADMIN_BASE is the base URL for your Armstrong admin.  It is highly
 # recommended that you change this to a different URL unless you enforce a
