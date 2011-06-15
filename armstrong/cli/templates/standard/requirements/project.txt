@@ -1,4 +1,4 @@
--e git://github.com/armstrongcms/armstrong.git#egg=armstrong
+armstrong>=11.06.0.beta.2,<11.07
 
 # This is included here because the latest release of django-mptt does not have
 # the required code.
