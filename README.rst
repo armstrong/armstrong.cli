@@ -14,11 +14,9 @@ Usage
 
 Installation
 ------------
+We recommend installing this through pypi.  You can install it like this::
 
-::
-
-    name="armstrong.cli"
-    pip install -e git://github.com/armstrongcms/$name.git#egg=$name
+    pip install armstrong.cli
 
 
 Contributing
