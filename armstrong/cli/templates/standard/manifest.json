@@ -1,0 +1,6 @@
+{"templated": {
+    "include": [
+        "config\/"
+    ]
+}
+}

@@ -1,7 +1,11 @@
+from __future__ import with_statement
 import codecs
 import glob
 import os
 import sys
+import json
+import re
+import shutil
 
 # TODO: use logging throughout for output
 
@@ -66,23 +70,34 @@ def init():
                 "Previous file detected!  Aborting!",
                 "",
                 "Please remove the following file if you wish to proceed:",
-                "  %s" % ("\n  ".join(existing_files)),
+                "  %s\n" % ("\n  ".join(existing_files)),
         ]
         sys.stderr.write("\n".join(output))
         return -1
 
+    template_paths = []
+    with open(template_dir + '/manifest.json', 'r') as manifest_file:
+        manifest = json.load(manifest_file)
+        paths = manifest.get('templated', {}).get('include', [])
+        template_paths = [re.compile(path) for path in paths]
+
+    def path_matches(path):
+        for expression in template_paths:
+            if expression.match(path):
+                return True
+        return False
+
     for (source, dest) in files:
         if os.path.isdir(source):
             os.mkdir(dest)
-        else:
-            # upgrade this to with statements as soon as 2.7 is ok as a dep
-            f = codecs.open(source, "r", "utf-8")
-            out = Template(f.read()).render(context)
-            f.close()
+        elif path_matches(os.path.relpath(source, template_dir)):
+            with codecs.open(source, "r", "utf-8") as f:
+                out = Template(f.read()).render(context)
 
-            f = codecs.open(dest, "w", "utf-8")
-            f.write(out)
-            f.close()
+            with codecs.open(dest, "w", "utf-8") as f:
+                f.write(out)
+        else:
+            shutil.copy(source, dest)
     print "armstrong initialized!"
 
 
