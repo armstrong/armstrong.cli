@@ -44,14 +44,18 @@ def init():
     if not os.path.exists(path):
         os.mkdir(path)
 
-    source_files = filter(
-            lambda x: x.endswith(".pyc") is False,
-            (glob.glob("%s/*" % template_dir)
-             + glob.glob("%s/*/*" % template_dir)))
+    def source_files():
+        for dirpath, dirnames, filenames in os.walk(template_dir):
+            for dirname in dirnames:
+                yield os.path.join(dirpath, dirname)
+            for name in filenames:
+                if not name.endswith(".pyc"):
+                    yield os.path.join(dirpath, name)
+
 
     existing_files = []
     files = []
-    for file in source_files:
+    for file in source_files():
         if file == "%s/__init__.py" % template_dir:
             # Don't need to create the project as a module
             continue
