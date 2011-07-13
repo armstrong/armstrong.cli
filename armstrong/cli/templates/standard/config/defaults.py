@@ -124,10 +124,12 @@ INSTALLED_APPS = (
     'armstrong.core.arm_wells',
     'armstrong.apps.articles',
     'armstrong.apps.content',
+    'armstrong.hatband',
 
     # Third-party apps that Armstrong requires
     'reversion',
     'mptt',
+    'taggit',
 )
 
 # A sample logging configuration. The only tangible logging
