@@ -12,7 +12,7 @@ import shutil
 CWD = os.getcwd()
 
 
-def init():
+def init(*args):
     """Initial a new Armstrong project (armstrong init [path])"""
     # TODO: allow db to be configured from command line
     # TODO: interactive mode to ask questions for each variable
@@ -29,16 +29,19 @@ def init():
             TEMPLATE_DIRS=[template_dir, ])
     from django.template import Context, Template
 
-    if len(sys.argv) > 2:
-        path = sys.argv[2]
+    if len(args) > 0 and not args[-1][0] == '-':
+        path = args[-1]
     else:
         path = CWD
+
+    demo = '--demo' in args
 
     # TODO: allow this to be passed in via command line
     project_name = os.path.basename(path)
 
     context = Context({
         "project_name": project_name,
+        "demo": demo
     })
 
     if not os.path.exists(path):
@@ -63,6 +66,10 @@ def init():
         if file.endswith("requirements/__init__.py"):
             # Ignore this file, it's just here so this gets picked up
             continue
+
+        if not demo and file.contains('/_demo/'):
+            continue
+
         new_file = file.replace(template_dir, path)
 
         files.append((file, new_file))
@@ -102,6 +109,7 @@ def init():
                 f.write(out)
         else:
             shutil.copy(source, dest)
+
     print "armstrong initialized!"
 
 
@@ -140,7 +148,7 @@ def main():
     if len(sys.argv) >= 2:
         subcommand = sys.argv[1]
         if subcommand in ARMSTRONG_COMMANDS:
-            sys.exit(ARMSTRONG_COMMANDS[subcommand]())
+            sys.exit(ARMSTRONG_COMMANDS[subcommand](*sys.argv[2:]))
 
     # are we in an armstrong project?
     if in_armstrong_project():

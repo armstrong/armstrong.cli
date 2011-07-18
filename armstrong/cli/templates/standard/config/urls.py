@@ -1,5 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
 from armstrong.core.arm_wells.views import QuerySetBackedWellView
+from armstrong.core.arm_sections.views import SimpleSectionView
 from armstrong.apps.articles.models import Article
 from django.views.generic.list_detail import object_detail
 # ADMIN_BASE is the base URL for your Armstrong admin.  It is highly
@@ -30,10 +31,14 @@ urlpatterns = patterns('',
                                               queryset=Article.published.all()),
             name='front_page'),
 
+    url(r'^section/(?P<full_slug>[-\w/]+)', 
+            SimpleSectionView.as_view(template_name='section.html'),
+            name='section_view'),
+
     url(r'^article/(?P<slug>[-\w]+)/', object_detail, {
                         'queryset':Article.published.all().select_subclasses(),
                         'template_name':'article.html',
                         'slug_field':'slug',
                     },
-                name='article_detail'),
+            name='article_detail'),
 )

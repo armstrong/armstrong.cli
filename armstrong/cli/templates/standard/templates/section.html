@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>{{ section.title }}</h2>
+    {% for object in section.items %}
+        {% include 'wells/articles/article/front_page.html' %}
+    {% endfor %}
+{% endblock %}

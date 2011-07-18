@@ -94,6 +94,7 @@ MIDDLEWARE_CLASSES = (
     'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 ROOT_URLCONF = 'config.urls'
@@ -117,6 +118,7 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Comment out the next line to disable admin documentation:
     'django.contrib.admindocs',
+    'debug_toolbar',
 
     # Armstrong packages
     'armstrong.core.arm_content',
@@ -131,6 +133,17 @@ INSTALLED_APPS = (
     'mptt',
     'taggit',
 )
+def custom_show_toolbar(request):
+    return True # Always show toolbar, for example purposes only.
+
+DEBUG_TOOLBAR_CONFIG = {
+    'INTERCEPT_REDIRECTS': False,
+    'SHOW_TOOLBAR_CALLBACK': custom_show_toolbar,
+    'HIDE_DJANGO_SQL': False,
+    'TAG': 'div',
+}
+
+ARMSTRONG_SECTION_ITEM_MODEL = 'armstrong.apps.content.models.Content'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to

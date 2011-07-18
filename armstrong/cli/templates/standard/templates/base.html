@@ -33,9 +33,9 @@ This is adapted from Paul Irish's HTML5 boilerplate.
     </header>
     <div id="sidemenu">
         {% block sidemenu %}
-        <ul>
-            <li><a href='{% url front_page %}'>Home</a></li>
-        </ul>
+        <a href='{% url front_page %}'>Home</a>
+        {% load arm_sections %}
+        {% section_menu section_view='section_view' %}
         {% endblock %}
     </div>
     <div id="container">
