@@ -1,5 +1,9 @@
 {% extends 'base.html' %}
 
+{% load layout_helpers %}
+
 {% block content %}
-    {{ well.render }}
+    {% for content in well.items %}
+        {% render_model content 'standard' %}
+    {% endfor %}
 {% endblock %}

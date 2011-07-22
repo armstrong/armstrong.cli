@@ -122,6 +122,7 @@ INSTALLED_APPS = (
 
     # Armstrong packages
     'armstrong.core.arm_content',
+    'armstrong.core.arm_layout',
     'armstrong.core.arm_sections',
     'armstrong.core.arm_wells',
     'armstrong.apps.articles',

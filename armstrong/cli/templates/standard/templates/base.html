@@ -1,6 +1,7 @@
 {% comment %}
 This is adapted from Paul Irish's HTML5 boilerplate.
 {% endcomment %}
+{% load arm_sections %}
 <!doctype html>
 <!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
 <!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
@@ -34,7 +35,6 @@ This is adapted from Paul Irish's HTML5 boilerplate.
     <div id="sidemenu">
         {% block sidemenu %}
         <a href='{% url front_page %}'>Home</a>
-        {% load arm_sections %}
         {% section_menu section_view='section_view' %}
         {% endblock %}
     </div>
