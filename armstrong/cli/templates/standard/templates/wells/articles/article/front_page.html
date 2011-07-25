@@ -1,9 +1,0 @@
-<div class='article'>
-    <h4>{{ object.title }}</h4>
-    {% autoescape off %}
-    <p>
-        {{ object.summary }} 
-        <a href="{% url article_detail slug=object.slug %}">Show more</a>
-    </p>
-    {% endautoescape %}
-</div>
