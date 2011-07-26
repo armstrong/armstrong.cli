@@ -67,7 +67,7 @@ def init(*args):
             # Ignore this file, it's just here so this gets picked up
             continue
 
-        if not demo and file.contains('/_demo/'):
+        if not demo and '/_demo' in file:
             continue
 
         new_file = file.replace(template_dir, path)
