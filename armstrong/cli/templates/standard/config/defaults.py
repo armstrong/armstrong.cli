@@ -118,7 +118,6 @@ INSTALLED_APPS = (
     'django.contrib.admin',
     # Comment out the next line to disable admin documentation:
     'django.contrib.admindocs',
-    'debug_toolbar',
 
     # Armstrong packages
     'armstrong.core.arm_content',
