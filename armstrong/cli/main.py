@@ -107,7 +107,7 @@ def init(*args):
 
             with codecs.open(dest, "w", "utf-8") as f:
                 f.write(out)
-        else:
+        elif not source.endswith('manifest.json'):
             shutil.copy(source, dest)
 
     print "armstrong initialized!"
