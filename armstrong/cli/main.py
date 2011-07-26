@@ -87,7 +87,7 @@ def init(*args):
         return -1
 
     template_paths = []
-    with open(template_dir + '/template.json', 'r') as manifest_file:
+    with open(template_dir + '/manifest.json', 'r') as manifest_file:
         manifest = json.load(manifest_file)
         paths = manifest.get('templated', {}).get('include', [])
         template_paths = [re.compile(path) for path in paths]
