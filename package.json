@@ -3,7 +3,8 @@
     "version": "0.4.0.alpha.0",
     "description": "Provides basic commands needed for Armstrong scaffolding",
     "entry_points": {
-        "console_scripts": ["armstrong = armstrong.cli.main:main"]
+        "console_scripts": ["armstrong = armstrong.cli.main:main"],
+        "armstrong.commands": ["init = armstrong.cli.commands.init:init"]
     },
     "install_requires": [
         "argparse"

@@ -9,26 +9,34 @@ from django.core.management import execute_manager, get_commands
 
 # TODO: use logging throughout for output
 CWD = os.getcwd()
+ENTRY_POINT = 'armstrong.commands'
 
 def in_armstrong_project():
     return os.path.isdir(os.path.join(CWD, "config"))
 
 def main():
-    parser = argparse.ArgumentParser(description='Choose subcommand to run.',
-            usage='armstrong subcommand [options]')
+    parser = argparse.ArgumentParser(description='Choose subcommand to run.')
     subparsers = parser.add_subparsers(title='subcommands')
 
-    init_parser = subparsers.add_parser('init', help='init --help')
-    init_parser.add_argument('--demo', action='store_true',
-            help='install demo data and media assets')
-    init_parser.add_argument('--template', default='standard')
-    init_parser.add_argument('path', type=os.path.abspath, default='.')
-    init_parser.set_defaults(func=init)
+    from pkg_resources import iter_entry_points
+
+    loaded = {}
+    for ep in iter_entry_points(group=ENTRY_POINT):
+        if ep.name in loaded:
+            continue
+        loaded[ep.name] = True
+        command = ep.load()
+        armstrong_parser = subparsers.add_parser(ep.name,
+                description=command.__doc__,
+                help=command.__doc__)
+        if hasattr(command, 'build_parser'):
+            command.build_parser(armstrong_parser)
+        armstrong_parser.set_defaults(func=command)
 
     django_commands = get_commands().keys()
     django_commands.sort()
     for command in django_commands:
-        dj_parser = subparsers.add_parser(command, help='')
+        dj_parser = subparsers.add_parser(command)
         dj_parser.add_argument("--production", action='store_true')
         dj_parser.set_defaults(func=call_django)
 
@@ -59,5 +67,5 @@ def call_django(argv=[], production=False):
         sys.exit(1)
     # django expects unparsed options, so we reset argv with the script name 
     # and subcommand
-    passed_argv = sys.argv[0:2] + argv
-    execute_manager(settings, argv=passed_argv)
+    new_argv = sys.argv[0:2] + argv
+    execute_manager(settings, argv=new_argv)
