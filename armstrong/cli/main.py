@@ -36,7 +36,7 @@ def main():
     django_commands = get_commands().keys()
     django_commands.sort()
     for command in django_commands:
-        dj_parser = subparsers.add_parser(command)
+        dj_parser = subparsers.add_parser(command, help='')
         dj_parser.add_argument("--production", action='store_true')
         dj_parser.set_defaults(func=call_django)
 
