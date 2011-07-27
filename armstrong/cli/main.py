@@ -25,10 +25,6 @@ def main():
     init_parser.add_argument('path', type=os.path.abspath, default='.')
     init_parser.set_defaults(func=init)
 
-    wp_parser = subparsers.add_parser('import_wp', help='import_wp --help')
-    wp_parser.add_argument('import_file', type=os.path.abspath)
-    wp_parser.set_defaults(func=import_wordpress)
-
     django_commands = get_commands().keys()
     django_commands.sort()
     for command in django_commands:
