@@ -4,5 +4,9 @@
     "description": "Provides basic commands needed for Armstrong scaffolding",
     "entry_points": {
         "console_scripts": ["armstrong = armstrong.cli.main:main"]
-    }
+    },
+    "install_requires": [
+        "argparse"
+    ]
+
 }
