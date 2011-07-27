@@ -120,15 +120,20 @@ INSTALLED_APPS = (
 
     # Armstrong packages
     'armstrong.core.arm_content',
+    'armstrong.core.arm_layout',
     'armstrong.core.arm_sections',
     'armstrong.core.arm_wells',
     'armstrong.apps.articles',
     'armstrong.apps.content',
+    'armstrong.hatband',
 
     # Third-party apps that Armstrong requires
     'reversion',
     'mptt',
+    'taggit',
 )
+
+ARMSTRONG_SECTION_ITEM_MODEL = 'armstrong.apps.content.models.Content'
 
 # A sample logging configuration. The only tangible logging
 # performed by this configuration is to send an email to
