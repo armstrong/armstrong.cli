@@ -113,4 +113,9 @@ class InitCommand(object):
 
         print "armstrong initialized!"
 
+    @property
+    def requires_armstrong():
+        return False
+
+
 init = InitCommand()

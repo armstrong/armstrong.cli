@@ -15,8 +15,6 @@ def in_armstrong_project():
 
 def main():
     parser = argparse.ArgumentParser(description='Choose subcommand to run.')
-    parser.add_argument("--production", action='store_true',
-                        help='use config.production setting')
     subparsers = parser.add_subparsers(title='subcommands')
 
     from pkg_resources import iter_entry_points
@@ -27,6 +25,10 @@ def main():
             continue
         loaded[ep.name] = True
         command = ep.load()
+        if (not in_armstrong_project() and
+                (not hasattr(command, 'requires_armstrong') or
+                command.requires_armstrong))
+            continue
         armstrong_parser = subparsers.add_parser(ep.name,
                 description=command.__doc__,
                 help=command.__doc__)
@@ -52,6 +54,8 @@ def main():
         django_commands.sort()
         for command in django_commands:
             dj_parser = subparsers.add_parser(command, help='')
+            dj_parser.add_argument("--production", action='store_true',
+                                   help='use config.production setting')
             dj_parser.set_defaults(func=call_django)
 
     args, argv = parser.parse_known_args()
