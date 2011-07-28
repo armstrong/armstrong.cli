@@ -3,6 +3,7 @@ from armstrong.core.arm_wells.views import QuerySetBackedWellView
 from armstrong.core.arm_sections.views import SimpleSectionView
 from armstrong.apps.articles.models import Article
 from django.views.generic.list_detail import object_detail
+from django.views.generic import TemplateView
 # ADMIN_BASE is the base URL for your Armstrong admin.  It is highly
 # recommended that you change this to a different URL unless you enforce a
 # strict password-strength policy for your users.
