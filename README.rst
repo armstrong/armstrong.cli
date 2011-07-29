@@ -10,7 +10,18 @@ Provides basic commands needed for Armstrong scaffolding
 Usage
 -----
 
-**TODO**
+armstrong.cli is used as the entry point for all armstrong specific commands as
+well as being a replacement for the django manage.py script. The base package
+provides the init command which will create a new armstrong project at a
+given path.
+
+To create additional armstrong commands, create a callable and specify it as an
+'armstrong.command' entry_point via setuptools. If the command can be run
+outside of the context of an armstrong project, the callable should have the
+attribute ``requires_armstrong`` set to false. Additionally, if the command
+takes argument, a subparser from ``argparse`` will be passed to the optional
+``build_parser`` method of your command.
+
 
 Installation
 ------------
