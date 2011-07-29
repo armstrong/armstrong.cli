@@ -27,7 +27,7 @@ def main():
         command = ep.load()
         if (not in_armstrong_project() and
                 (not hasattr(command, 'requires_armstrong') or
-                command.requires_armstrong))
+                 command.requires_armstrong)):
             continue
         armstrong_parser = subparsers.add_parser(ep.name,
                 description=command.__doc__,
