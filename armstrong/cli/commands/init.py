@@ -68,7 +68,7 @@ class InitCommand(object):
                 # Ignore this file, it's just here so this gets picked up
                 continue
 
-            if not demo and '/_demo' in file_name:
+            if not demo and '/demo' in file_name:
                 continue
 
             new_file = file_name.replace(template_dir, path)
@@ -114,7 +114,7 @@ class InitCommand(object):
         print "armstrong initialized!"
 
     @property
-    def requires_armstrong():
+    def requires_armstrong(self):
         return False
 
 
