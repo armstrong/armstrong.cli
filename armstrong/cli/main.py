@@ -4,7 +4,6 @@ import sys
 import argparse
 
 from .commands.init import init
-from django.core.management import execute_manager, get_commands, setup_environ
 
 # TODO: use logging throughout for output
 CWD = os.getcwd()
@@ -45,10 +44,12 @@ def main():
         try:
             settings_module = 'config.development'
             __import__('config.development', globals(), locals())
+            from django.core.management import setup_environ
             setup_environ(sys.modules[settings_module])
         except ImportError, e:
             sys.stderr.write("Unable to import %s: %s\n" % (settings_module, e))
             sys.exit(1)
+        from django.core.management import get_commands
         django_commands = get_commands().keys()
         django_commands.sort()
         for command in django_commands:
@@ -81,4 +82,5 @@ def call_django(argv=[], production=False):
     # django expects unparsed options, so we reset argv with the script name 
     # and subcommand
     new_argv = sys.argv[0:2] + argv
+    from django.core.management import execute_manager
     execute_manager(settings, argv=new_argv)
