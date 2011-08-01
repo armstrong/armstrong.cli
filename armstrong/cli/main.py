@@ -7,7 +7,7 @@ from .commands.init import init
 # TODO: use logging throughout for output
 CWD = os.getcwd()
 ENTRY_POINT = 'armstrong.commands'
-CONFIGURATION_MODULE = "config"
+CONFIGURATION_MODULE = "settings"
 
 def in_armstrong_project():
     return os.path.isdir(os.path.join(CWD, CONFIGURATION_MODULE))
