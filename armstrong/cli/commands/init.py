@@ -59,9 +59,12 @@ class InitCommand(object):
 
         existing_files = []
         files = []
+        excluded_files = [
+                "%s/__init__.py" % template_dir,
+                "%s/manifest.json" % template_dir,
+        ]
         for file_name in source_files():
-            if file_name == "%s/__init__.py" % template_dir:
-                # Don't need to create the project as a module
+            if file_name in excluded_files:
                 continue
 
             if file_name.endswith("requirements/__init__.py"):
