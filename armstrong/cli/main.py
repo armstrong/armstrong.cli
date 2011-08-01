@@ -1,17 +1,21 @@
-from __future__ import with_statement
 import os
 import sys
 import argparse
 
 from .commands.init import init
-from django.core.management import execute_manager, get_commands, setup_environ
 
 # TODO: use logging throughout for output
 CWD = os.getcwd()
 ENTRY_POINT = 'armstrong.commands'
+CONFIGURATION_MODULE = "config"
 
 def in_armstrong_project():
-    return os.path.isdir(os.path.join(CWD, "config"))
+    return os.path.isdir(os.path.join(CWD, CONFIGURATION_MODULE))
+
+def get_current_configuration():
+    """Return appropriate settings name"""
+    type = "production" if "--production" in sys.argv else "development"
+    return "%s.%s" % (CONFIGURATION_MODULE, type)
 
 def main():
     parser = argparse.ArgumentParser(description='Choose subcommand to run.')
@@ -26,8 +30,7 @@ def main():
         loaded[ep.name] = True
         command = ep.load()
         if (not in_armstrong_project() and
-                (not hasattr(command, 'requires_armstrong') or
-                 command.requires_armstrong)):
+                getattr(command, "requires_armstrong", False)):
             continue
         armstrong_parser = subparsers.add_parser(ep.name,
                 description=command.__doc__,
@@ -44,18 +47,20 @@ def main():
             sys.path.insert(0, CWD)
 
         try:
-            settings_module = 'config.development'
-            __import__('config.development', globals(), locals())
+            settings_module = get_current_configuration()
+            __import__(settings_module, globals(), locals())
+            from django.core.management import setup_environ
             setup_environ(sys.modules[settings_module])
         except ImportError, e:
             sys.stderr.write("Unable to import %s: %s\n" % (settings_module, e))
             sys.exit(1)
+        from django.core.management import get_commands
         django_commands = get_commands().keys()
         django_commands.sort()
         for command in django_commands:
             dj_parser = subparsers.add_parser(command, help='')
             dj_parser.add_argument("--production", action='store_true',
-                                   help='use config.production setting')
+                help='use %s.production setting' % CONFIGURATION_MODULE)
             dj_parser.set_defaults(func=call_django)
 
     args, argv = parser.parse_known_args()
@@ -69,9 +74,9 @@ def main():
 def call_django(argv=[], production=False):
     if CWD not in sys.path:
         sys.path.insert(0, CWD)
-    settings_module = "config.development"
+    settings_module = "%s.development" % CONFIGURATION_MODULE
     if production:
-        settings_module = "config.production"
+        settings_module = "%s.production" % CONFIGURATION_MODULE
     settings = None
     try:
         __import__(settings_module, globals(), locals())
@@ -82,4 +87,5 @@ def call_django(argv=[], production=False):
     # django expects unparsed options, so we reset argv with the script name 
     # and subcommand
     new_argv = sys.argv[0:2] + argv
+    from django.core.management import execute_manager
     execute_manager(settings, argv=new_argv)
