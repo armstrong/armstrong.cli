@@ -28,10 +28,12 @@ urlpatterns = patterns('',
 
     # Load the Armstrong "success" page by default
     # {% if demo %}
-    url(r'^$', QuerySetBackedWellView.as_view(well_title='front_page',
-                                              template_name="front_page.html",
-                                              queryset=Article.published.all()),
-                                              name='front_page'),
+    url(r'^$',
+            QuerySetBackedWellView.as_view(well_title='front_page',
+                                           template_name="front_page.html",
+                                           queryset=Article.published.all(),
+                                    ),
+            name='front_page'),
     # {% else %}
     # Below is an example well view that might be used to display a well named
     # 'front_page' allowing for placement of content on the home page. The view
