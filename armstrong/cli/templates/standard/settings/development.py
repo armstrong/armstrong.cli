@@ -21,6 +21,10 @@ DATABASES = {
     }
 }
 
+# URL configuration to use in development mode
+ROOT_URLCONF = 'urls.development'
+
+
 # Attempt to load any settings from settings.local_development, but ignore any
 # errors complaining about them not being present.
 try:

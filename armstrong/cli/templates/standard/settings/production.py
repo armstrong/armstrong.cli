@@ -16,6 +16,9 @@ DATABASES = {
     }
 }
 
+# URL configuration to use in production mode
+ROOT_URLCONF = 'urls.production'
+
 # Attempt to load any settings from settings.local_production, but ignore any
 # errors complaining about them not being present.
 try:

@@ -31,7 +31,7 @@ urlpatterns = patterns('',
     url(r'^$', QuerySetBackedWellView.as_view(well_title='front_page',
                                               template_name="front_page.html",
                                               queryset=Article.published.all()),
-            name='front_page'),
+                                              name='front_page'),
     # {% else %}
     # Below is an example well view that might be used to display a well named
     # 'front_page' allowing for placement of content on the home page. The view
@@ -40,11 +40,11 @@ urlpatterns = patterns('',
     #url(r'^$', QuerySetBackedWellView.as_view(well_title='front_page',
     #                                          template_name="front_page.html",
     #                                          queryset=Article.published.all()),
-    #        name='front_page'),
+    #                                          name='front_page'),
     url(r'^$', TemplateView.as_view(template_name="index.html")),
     # {% endif %}
 
-    url(r'^section/(?P<full_slug>[-\w/]+)', 
+    url(r'^section/(?P<full_slug>[-\w/]+)',
             SimpleSectionView.as_view(template_name='section.html'),
             name='section_view'),
 
