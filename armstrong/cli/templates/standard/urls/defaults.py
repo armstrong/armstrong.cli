@@ -10,8 +10,8 @@ from django.views.generic import TemplateView
 ADMIN_BASE = "admin"
 
 
-# Comment the next two lines out to disnable the admin:
-from django.contrib import admin
+# Comment the next two lines out to disable the admin:
+from armstrong import hatband as admin
 admin.autodiscover()
 
 
