@@ -3,14 +3,15 @@ from armstrong.core.arm_wells.views import QuerySetBackedWellView
 from armstrong.core.arm_sections.views import SimpleSectionView
 from armstrong.apps.articles.models import Article
 from django.views.generic.list_detail import object_detail
+from django.views.generic import TemplateView
 # ADMIN_BASE is the base URL for your Armstrong admin.  It is highly
 # recommended that you change this to a different URL unless you enforce a
 # strict password-strength policy for your users.
 ADMIN_BASE = "admin"
 
 
-# Comment the next two lines out to disnable the admin:
-from django.contrib import admin
+# Comment the next two lines out to disable the admin:
+from armstrong import hatband as admin
 admin.autodiscover()
 
 
@@ -26,9 +27,11 @@ urlpatterns = patterns('',
     url(r'^%s/' % ADMIN_BASE, include(admin.site.urls)),
 
     # {% if demo %}
-    url(r'^$', QuerySetBackedWellView.as_view(well_title='front_page',
-                                              template_name="front_page.html",
-                                              queryset=Article.published.all()),
+    url(r'^$',
+            QuerySetBackedWellView.as_view(well_title='front_page',
+                                           template_name="front_page.html",
+                                           queryset=Article.published.all(),
+                                    ),
             name='front_page'),
     # {% else %}
     # Below is an example well view that might be used to display a well named
@@ -44,7 +47,7 @@ urlpatterns = patterns('',
     url(r'^$', TemplateView.as_view(template_name="index.html")),
     # {% endif %}
 
-    url(r'^section/(?P<full_slug>[-\w/]+)', 
+    url(r'^section/(?P<full_slug>[-\w/]+)',
             SimpleSectionView.as_view(template_name='section.html'),
             name='section_view'),
 

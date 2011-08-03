@@ -3,7 +3,7 @@ import os
 import sys
 
 # Change this to reflect the environment you're in
-os.environ['DJANGO_SETTINGS_MODULE'] = 'config.development'
+os.environ['DJANGO_SETTINGS_MODULE'] = 'settings.development'
 
 # Make sure that this project directory is first in the sys.path, or at least
 # as close to first as can be reasonably assured in Python.

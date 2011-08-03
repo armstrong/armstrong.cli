@@ -1,5 +1,5 @@
 # Production settings for {{ project_name }}
-from config.defaults import *
+from settings.defaults import *
 
 DEBUG = False
 TEMPLATE_DEBUG = DEBUG
@@ -16,9 +16,12 @@ DATABASES = {
     }
 }
 
-# Attempt to load any settings from config.local_development, but ignore any
+# URL configuration to use in production mode
+ROOT_URLCONF = 'urls.production'
+
+# Attempt to load any settings from settings.local_production, but ignore any
 # errors complaining about them not being present.
 try:
-    from config.local_production import *
+    from settings.local_production import *
 except ImportError, e:
     pass
