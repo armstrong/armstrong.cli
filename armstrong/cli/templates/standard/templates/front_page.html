@@ -3,7 +3,7 @@
 {% load layout_helpers %}
 
 {% block content %}
-    {% for content in well.items %}
-        {% render_model content 'standard' %}
-    {% endfor %}
+        {% for content in well.items|slice:":15" %}
+            {% render_model content 'standard' %}
+        {% endfor %}
 {% endblock %}
