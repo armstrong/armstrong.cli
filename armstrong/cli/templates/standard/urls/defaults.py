@@ -58,3 +58,7 @@ urlpatterns = patterns('',
                     },
             name='article_detail'),
 )
+
+# Uncomment the following two lines if you want to expose our default API
+# from .api import urlpatterns as api_urlpatterns
+# urlpatterns += api_urlpatterns
