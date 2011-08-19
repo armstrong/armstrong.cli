@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
 from armstrong.core.arm_wells.views import QuerySetBackedWellView
-from armstrong.core.arm_sections.views import SimpleSectionView
+from armstrong.core.arm_sections.views import SimpleSectionView, SectionFeed
 from armstrong.apps.articles.models import Article
 from django.views.generic.list_detail import object_detail
 from django.views.generic import TemplateView
@@ -50,6 +50,9 @@ urlpatterns = patterns('',
     url(r'^section/(?P<full_slug>[-\w/]+)',
             SimpleSectionView.as_view(template_name='section.html'),
             name='section_view'),
+    url(r'^feed/section/(?P<full_slug>[-\w/]+)',
+            SectionFeed(section_view='section_view'),
+            name='section_feed'),
 
     url(r'^article/(?P<slug>[-\w]+)/', object_detail, {
                         'queryset':Article.published.all().select_subclasses(),
