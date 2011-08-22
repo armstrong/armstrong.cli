@@ -1,5 +1,5 @@
 from armstrong.core.arm_sections.models import Section
-from armstrong.apps.articles.models import Section
+from armstrong.apps.articles.models import Articles
 from django.core.urlresolvers import reverse
 
 def get_url_for_model(obj):
