@@ -1,7 +1,8 @@
 from django.conf.urls.defaults import patterns, include, url
 from armstrong.core.arm_wells.views import QuerySetBackedWellView
-from armstrong.core.arm_sections.views import SimpleSectionView
+from armstrong.core.arm_sections.views import SimpleSectionView, SectionFeed
 from armstrong.apps.articles.models import Article
+from armstrong.apps.articles.views import ArticleFeed
 from django.views.generic.list_detail import object_detail
 from django.views.generic import TemplateView
 # ADMIN_BASE is the base URL for your Armstrong admin.  It is highly
@@ -14,6 +15,7 @@ ADMIN_BASE = "admin"
 from armstrong import hatband as admin
 admin.autodiscover()
 
+from .utils import get_url_for_model
 
 urlpatterns = patterns('',
     # Examples:
@@ -50,6 +52,15 @@ urlpatterns = patterns('',
     url(r'^section/(?P<full_slug>[-\w/]+)',
             SimpleSectionView.as_view(template_name='section.html'),
             name='section_view'),
+    url(r'^feed/section/(?P<full_slug>[-\w/]+)',
+            SectionFeed(section_view='section_view'),
+            name='section_feed'),
+
+    url(r'^feed/all',
+            ArticleFeed(title='Demo site articles',
+                        link='/',
+                        queryset=Article.objects.all()),
+            name='all_articles_feed'),
 
     url(r'^article/(?P<slug>[-\w]+)/', object_detail, {
                         'queryset':Article.published.all().select_subclasses(),

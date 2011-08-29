@@ -117,12 +117,14 @@ INSTALLED_APPS = (
     'django.contrib.admindocs',
 
     # Armstrong packages
+    'armstrong.core.arm_access',
     'armstrong.core.arm_content',
     'armstrong.core.arm_layout',
     'armstrong.core.arm_sections',
     'armstrong.core.arm_wells',
     'armstrong.apps.articles',
     'armstrong.apps.content',
+    'armstrong.apps.related_content',
     'armstrong.hatband',
 
     # Third-party apps that Armstrong requires
