@@ -11,6 +11,17 @@ CONFIGURATION_MODULE = "settings"
 
 
 def in_armstrong_project():
+    global CWD  # XXX booooooooo global
+    path = CWD
+    while os.path.split(path)[1]:
+        joined = os.path.join(path, CONFIGURATION_MODULE)
+        if os.path.isdir(joined) and \
+                os.path.exists(os.path.join(joined, '__init__.py')):
+            CWD = path
+            return True
+        path = os.path.split(path)[0]
+        print path # XXX booooo print
+    return False
     return os.path.isdir(os.path.join(CWD, CONFIGURATION_MODULE))
 
 
