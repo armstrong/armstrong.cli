@@ -5,23 +5,28 @@ import argparse
 from .commands.init import init
 
 # TODO: use logging throughout for output
-CWD = os.getcwd()
 ENTRY_POINT = 'armstrong.commands'
 CONFIGURATION_MODULE = "settings"
 
 
-def in_armstrong_project():
-    global CWD  # XXX booooooooo global
-    path = CWD
-    while os.path.split(path)[1]:
+def find_project_dir(path=os.getcwd()):
+    """Attempt to find the project root, returns None if not found"""
+    path_split = os.path.split(path)
+    while path_split[1]:
         joined = os.path.join(path, CONFIGURATION_MODULE)
+        # if in_armstrong_project():
         if os.path.isdir(joined) and \
                 os.path.exists(os.path.join(joined, '__init__.py')):
-            CWD = path
-            return True
-        path = os.path.split(path)[0]
-        print path # XXX booooo print
-    return False
+            return path
+        path = path_split[0]
+        path_split = os.path.split(path)
+    # we ran out of parents
+    return None
+
+CWD = find_project_dir() or os.getcwd()
+
+
+def in_armstrong_project():
     return os.path.isdir(os.path.join(CWD, CONFIGURATION_MODULE))
 
 
