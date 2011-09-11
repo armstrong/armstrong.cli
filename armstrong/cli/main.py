@@ -9,13 +9,16 @@ CWD = os.getcwd()
 ENTRY_POINT = 'armstrong.commands'
 CONFIGURATION_MODULE = "settings"
 
+
 def in_armstrong_project():
     return os.path.isdir(os.path.join(CWD, CONFIGURATION_MODULE))
+
 
 def get_current_configuration():
     """Return appropriate settings name"""
     type = "production" if "--production" in sys.argv else "development"
     return "%s.%s" % (CONFIGURATION_MODULE, type)
+
 
 def main():
     parser = argparse.ArgumentParser(description='Choose subcommand to run.')
@@ -52,7 +55,8 @@ def main():
             from django.core.management import setup_environ
             setup_environ(sys.modules[settings_module])
         except ImportError, e:
-            sys.stderr.write("Unable to import %s: %s\n" % (settings_module, e))
+            sys.stderr.write("Unable to import %s: %s\n" %
+                             (settings_module, e))
             sys.exit(1)
         from django.core.management import get_commands
         django_commands = get_commands().keys()
@@ -71,6 +75,7 @@ def main():
     else:
         func(**kwargs)
 
+
 def call_django(argv=[], production=False):
     if CWD not in sys.path:
         sys.path.insert(0, CWD)
@@ -84,7 +89,7 @@ def call_django(argv=[], production=False):
     except ImportError, e:
         sys.stderr.write("Unable to import %s: %s\n" % (settings_module, e))
         sys.exit(1)
-    # django expects unparsed options, so we reset argv with the script name 
+    # django expects unparsed options, so we reset argv with the script name
     # and subcommand
     new_argv = sys.argv[0:2] + argv
     from django.core.management import execute_manager

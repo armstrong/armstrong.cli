@@ -9,10 +9,13 @@ import argparse
 
 CWD = os.getcwd()
 
+
 class InitCommand(object):
     """Initialize a new Armstrong project"""
+
     def build_parser(self, parser):
-        parser.description='Initialize a new Armstrong project from a template'
+        parser.description = \
+                'Initialize a new Armstrong project from a template'
         parser.add_argument('--demo', action='store_true',
                 help='install demo data and media assets')
         parser.add_argument('--template', default='standard',
@@ -42,8 +45,7 @@ class InitCommand(object):
 
         context = Context({
             "project_name": project_name,
-            "demo": demo
-        })
+            "demo": demo})
 
         if not os.path.exists(path):
             os.mkdir(path)
