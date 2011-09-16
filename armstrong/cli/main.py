@@ -9,14 +9,19 @@ ENTRY_POINT = 'armstrong.commands'
 CONFIGURATION_MODULE = "settings"
 
 
+def in_armstrong_project(some_path=None):
+    if some_path is None:
+        some_path = CWD
+    joined = os.path.join(some_path, CONFIGURATION_MODULE)
+    return os.path.isdir(joined) and \
+                os.path.exists(os.path.join(joined, '__init__.py'))
+
+
 def find_project_dir(path=os.getcwd()):
     """Attempt to find the project root, returns None if not found"""
     path_split = os.path.split(path)
     while path_split[1]:
-        joined = os.path.join(path, CONFIGURATION_MODULE)
-        # if in_armstrong_project():
-        if os.path.isdir(joined) and \
-                os.path.exists(os.path.join(joined, '__init__.py')):
+        if in_armstrong_project(path):
             return path
         path = path_split[0]
         path_split = os.path.split(path)
@@ -24,10 +29,6 @@ def find_project_dir(path=os.getcwd()):
     return None
 
 CWD = find_project_dir() or os.getcwd()
-
-
-def in_armstrong_project():
-    return os.path.isdir(os.path.join(CWD, CONFIGURATION_MODULE))
 
 
 def get_current_configuration():
