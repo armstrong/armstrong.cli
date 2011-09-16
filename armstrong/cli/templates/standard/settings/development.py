@@ -9,7 +9,7 @@ DATABASES = {
     'default': {
         #{% if demo %}
         'ENGINE': 'django.db.backends.sqlite3',  # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
-        'NAME': './demo/demo_database.sqlite3',                       # Or path to database file if using sqlite3.
+        'NAME': project_dir('./demo/demo_database.sqlite3'),                       # Or path to database file if using sqlite3.
         #{% else %}
         'ENGINE': 'django.db.backends.',  # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
         'NAME': '',                       # Or path to database file if using sqlite3.
