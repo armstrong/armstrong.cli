@@ -5,6 +5,7 @@ from armstrong.apps.articles.models import Article
 from armstrong.apps.articles.views import ArticleFeed
 from django.views.generic.list_detail import object_detail
 from django.views.generic import TemplateView
+from django.conf import settings
 # ADMIN_BASE is the base URL for your Armstrong admin.  It is highly
 # recommended that you change this to a different URL unless you enforce a
 # strict password-strength policy for your users.
@@ -28,6 +29,8 @@ urlpatterns = patterns('',
     # Comment the next line to disable the admin:
     url(r'^%s/' % ADMIN_BASE, include(admin.site.urls)),
 
+    url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
+            {'document_root': settings.MEDIA_ROOT}),
     # {% if demo %}
     url(r'^$',
             QuerySetBackedWellView.as_view(well_title='front_page',
