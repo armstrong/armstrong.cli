@@ -41,12 +41,19 @@ USE_L10N = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
+# {% if demo %}
+MEDIA_ROOT = 'demo/media/'
+# {% else %}
 MEDIA_ROOT = ''
+# {% endif %}
+
+# path relative to the MEDIA_ROOT where armstrong will upload images
+ARMSTRONG_IMAGES_UPLOAD_PATH = 'armstrong/images/'
 
 # URL that handles the media served from MEDIA_ROOT. Make sure to use a
 # trailing slash.
 # Examples: "http://media.lawrence.com/media/", "http://example.com/media/"
-MEDIA_URL = ''
+MEDIA_URL = '/media/'
 
 # Absolute path to the directory static files should be collected to.
 # Don't put anything in this directory yourself; store your static files
@@ -124,6 +131,8 @@ INSTALLED_APPS = (
     'armstrong.core.arm_wells',
     'armstrong.apps.articles',
     'armstrong.apps.content',
+    'armstrong.apps.images',
+    'sorl.thumbnail',
     'armstrong.apps.related_content',
     'armstrong.hatband',
 
@@ -156,4 +165,10 @@ LOGGING = {
             'propagate': True,
         },
     }
+}
+
+ARMSTRONG_PRESETS = {
+    'article_head': {'width': 600},
+    'article_half': {'width': 270},
+    'article_small': {'width': 175},
 }
