@@ -1,4 +1,5 @@
 {% extends 'base.html' %}
+{% load related_content %}
 
 {% block header %}
     <h1>Welcome to Armstrong!</h1>
@@ -6,7 +7,9 @@
 
 {% block content %}
     <h4>{{ object.title }}</h4>
+    {% lead_art object 'article_head' %}
     <div class="byline">{{ object.authors }} - {{ object.pub_date }}</div>
+
     {% autoescape off %}
     <div class="story">{{ object.body }}</div>
     {% endautoescape %}
