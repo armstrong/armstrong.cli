@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+{% load layout_helpers %}
+
+{% block content %}
+    <h2>{{ section.title }}</h2>
+    {% for object in section.items %}
+        {% render_model object 'standard' %}
+    {% endfor %}
+{% endblock %}
