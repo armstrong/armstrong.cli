@@ -71,9 +71,6 @@ class InitCommand(object):
                 # Ignore this file, it's just here so this gets picked up
                 continue
 
-            if not demo and '/demo' in file_name:
-                continue
-
             new_file = file_name.replace(template_dir, path)
 
             files.append((file_name, new_file))
