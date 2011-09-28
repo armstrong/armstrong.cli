@@ -1,6 +1,6 @@
 from django.conf.urls.defaults import patterns, include, url
-from armstrong.core.arm_wells.views import QuerySetBackedWellView
 from armstrong.core.arm_sections.views import SimpleSectionView, SectionFeed
+#from armstrong.core.arm_wells.views import QuerySetBackedWellView
 from armstrong.apps.articles.models import Article
 from armstrong.apps.articles.views import ArticleFeed
 from django.views.generic.list_detail import object_detail
@@ -34,6 +34,13 @@ urlpatterns = patterns('',
 
     # Load the Armstrong "success" page by default
     url(r'^$', TemplateView.as_view(template_name="index.html")),
+
+    # Uncomment out this to change to the the well view
+    #url(r'^$',
+    #    QuerySetBackedWellView.as_view(well_title='front_page',
+    #                                   template_name="front_page.html",
+    #                                   queryset=Article.published.all(), ),
+    #    name='front_page'),
 
     url(r'^section/(?P<full_slug>[-\w/]+)',
             SimpleSectionView.as_view(template_name='section.html'),
