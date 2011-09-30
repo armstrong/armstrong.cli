@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>Welcome to Armstrong!</h1>
+{% endblock %}
+
+{% block content %}
+    <h4>{{ object.title }}</h4>
+    <div class="byline">{{ object.authors }} - {{ object.pub_date }}</div>
+    {% autoescape off %}
+    <div class="story">{{ object.body }}</div>
+    {% endautoescape %}
+{% endblock %}
