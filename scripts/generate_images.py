@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
-import Image, ImageDraw
+import Image
+import ImageDraw
 import random
 from armstrong.apps.images import models
 from armstrong.apps.articles.models import Article
@@ -13,14 +14,18 @@ from django.conf import settings
 WIDTH = 640
 HEIGHT = 480
 
+
 def rint(x):
     return random.randint(1, x)
 
+
 def getRandomPt():
-    return (rint(WIDTH-1), rint(HEIGHT-1))
+    return (rint(WIDTH - 1), rint(HEIGHT - 1))
+
 
 def getRandomColor():
     return (rint(255), rint(255), rint(255))
+
 
 def make_image(path):
     im = Image.new('RGB', (WIDTH, HEIGHT))
@@ -46,4 +51,3 @@ for i, article in enumerate(Article.objects.all()):
     RelatedContent.objects.create(destination_object=img,
                                   source_object=article,
                                   related_type=lede_art)
-
