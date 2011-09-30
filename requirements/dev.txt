@@ -1,0 +1,4 @@
+django==1.3.1
+armstrong.apps.articles
+armstrong.apps.images
+armstrong.apps.related_content
