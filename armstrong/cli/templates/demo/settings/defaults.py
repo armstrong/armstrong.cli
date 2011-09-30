@@ -125,7 +125,6 @@ INSTALLED_APPS = (
     'armstrong.apps.articles',
     'armstrong.apps.content',
     'armstrong.apps.images',
-    'sorl.thumbnail',
     'armstrong.apps.related_content',
     'armstrong.hatband',
 
@@ -133,6 +132,7 @@ INSTALLED_APPS = (
     'reversion',
     'mptt',
     'taggit',
+    'sorl.thumbnail',
 )
 
 ARMSTRONG_SECTION_ITEM_MODEL = 'armstrong.apps.content.models.Content'
