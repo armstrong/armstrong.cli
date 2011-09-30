@@ -129,10 +129,10 @@ INSTALLED_APPS = (
     'armstrong.hatband',
 
     # Third-party apps that Armstrong requires
-    'reversion',
     'mptt',
-    'taggit',
+    'reversion',
     'sorl.thumbnail',
+    'taggit',
 )
 
 ARMSTRONG_SECTION_ITEM_MODEL = 'armstrong.apps.content.models.Content'
