@@ -1,10 +1,10 @@
-# Development settings for {{ project_name }}
+# Production settings for {{ project_name }}
 from settings.defaults import *
 
-DEBUG = True
+DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
-# Change this to work with your default development database
+# Change this to work with your default production database
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.',  # Add 'postgresql_psycopg2', 'postgresql', 'mysql', 'sqlite3' or 'oracle'.
@@ -16,13 +16,12 @@ DATABASES = {
     }
 }
 
-# URL configuration to use in development mode
-ROOT_URLCONF = 'urls.development'
+# URL configuration to use in production mode
+ROOT_URLCONF = 'urls.production'
 
-
-# Attempt to load any settings from settings.local_development, but ignore any
+# Attempt to load any settings from settings.local_production, but ignore any
 # errors complaining about them not being present.
 try:
-    from settings.local_development import *
+    from settings.local_production import *
 except ImportError, e:
     pass

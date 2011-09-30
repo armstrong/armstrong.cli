@@ -1,0 +1,28 @@
+[
+  {
+    "pk": 1,
+    "model": "arm_wells.welltype",
+    "fields": {
+      "slug": "front_page",
+      "title": "front_page"
+    }
+  },
+  {
+    "pk": 1,
+    "model": "arm_wells.well",
+    "fields": {
+      "active": true,
+      "pub_date": "2011-07-06 17:28:10",
+      "expires": null,
+      "type": 1
+    }
+  },
+  {
+    "pk": 1,
+    "model": "auth.group",
+    "fields": {
+      "name": "Authors",
+      "permissions": []
+    }
+  }
+]

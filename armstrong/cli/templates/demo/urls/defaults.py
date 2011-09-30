@@ -4,7 +4,6 @@ from armstrong.core.arm_sections.views import SimpleSectionView, SectionFeed
 from armstrong.apps.articles.models import Article
 from armstrong.apps.articles.views import ArticleFeed
 from django.views.generic.list_detail import object_detail
-from django.views.generic import TemplateView
 from django.conf import settings
 # ADMIN_BASE is the base URL for your Armstrong admin.  It is highly
 # recommended that you change this to a different URL unless you enforce a
@@ -32,8 +31,13 @@ urlpatterns = patterns('',
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
             {'document_root': settings.MEDIA_ROOT}),
 
-    # Load the Armstrong "success" page by default
-    url(r'^$', TemplateView.as_view(template_name="index.html")),
+    # Below is an example well view that might be used to display a well named
+    # 'front_page' allowing for placement of content on the home page.  The view
+    # works so long as there is a well with the title ``front_page`` present.
+    url(r'^$', QuerySetBackedWellView.as_view(well_title='front_page',
+                                              template_name="front_page.html",
+                                              queryset=Article.published.all()),
+        name='front_page'),
 
     url(r'^section/(?P<full_slug>[-\w/]+)',
             SimpleSectionView.as_view(template_name='section.html'),

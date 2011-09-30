@@ -131,6 +131,7 @@ INSTALLED_APPS = (
     # Third-party apps that Armstrong requires
     'mptt',
     'reversion',
+    'sorl.thumbnail',
     'taggit',
 )
 
