@@ -129,13 +129,12 @@ INSTALLED_APPS = (
     'armstrong.apps.articles',
     'armstrong.apps.content',
     'armstrong.apps.images',
-    'sorl.thumbnail',
     'armstrong.apps.related_content',
     'armstrong.hatband',
 
     # Third-party apps that Armstrong requires
-    'reversion',
     'mptt',
+    'reversion',
     'taggit',
 )
 
