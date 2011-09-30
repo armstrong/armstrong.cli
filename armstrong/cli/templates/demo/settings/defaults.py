@@ -38,11 +38,7 @@ USE_L10N = True
 
 # Absolute filesystem path to the directory that will hold user-uploaded files.
 # Example: "/home/media/media.lawrence.com/media/"
-# {% if demo %}
-MEDIA_ROOT = 'demo/media/'
-# {% else %}
-MEDIA_ROOT = ''
-# {% endif %}
+MEDIA_ROOT = project_dir("media")
 
 # path relative to the MEDIA_ROOT where armstrong will upload images
 ARMSTRONG_IMAGES_UPLOAD_PATH = 'armstrong/images/'
