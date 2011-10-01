@@ -1,9 +1,6 @@
 {% load related_content %}
 <div class='article'>
     <h2>{{ object.title }}</h2>
-    <div style='float:left; margin:10px'>
-        {% lead_art object 'article_half' %}
-    </div>
     {% autoescape off %}
     <p style='font-size: larger'>
         {{ object.summary }}
