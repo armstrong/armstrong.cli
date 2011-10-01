@@ -10,7 +10,7 @@
         ]
     },
     "install_requires": [
-        "argparse"
+        "argparse==1.2.1"
     ]
 
 }
