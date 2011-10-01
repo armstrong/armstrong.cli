@@ -1,0 +1,47 @@
+{% comment %}
+This is adapted from Paul Irish's HTML5 boilerplate.
+{% endcomment %}
+{% load section_helpers %}
+<!doctype html>
+<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
+<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+    <meta charset="utf-8">
+
+    <title>Your New Armstrong Project</title>
+    <meta name="description" content="">
+    <meta name="author" content="">
+</head>
+<style>
+    #sidemenu {
+        float:left;
+        width:150px;
+        margin-right:15px;
+    }
+    #container {
+        float:left;
+        width:600px;
+    }
+</style>
+<body>
+    <header>
+        {% block header %}
+            <h1>Welcome to Armstrong!</h1>
+        {% endblock %}
+    </header>
+    <div id="sidemenu">
+        {% block sidemenu %}
+        <a href='{% url front_page %}'>Home</a>
+        {% section_menu section_view='section_view' %}
+        {% endblock %}
+    </div>
+    <div id="container">
+        {% block content %}
+        {% endblock %}
+    </div> <!--! end of #container -->
+    <!-- JavaScript at the bottom for fast page loading -->
+</body>
+</html>
