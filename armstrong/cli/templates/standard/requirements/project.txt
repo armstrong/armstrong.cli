@@ -1,4 +1,4 @@
-armstrong==11.09.0.alpha.1
+armstrong==11.09.0
 
 # This is included here because the latest release of django-mptt does not have
 # the required code.
