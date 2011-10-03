@@ -1,6 +1,6 @@
 {
     "name": "armstrong.cli",
-    "version": "1.0.0",
+    "version": "1.0.1",
     "description": "Provides basic commands needed for Armstrong scaffolding",
     "entry_points": {
         "console_scripts": ["armstrong = armstrong.cli.main:main"],

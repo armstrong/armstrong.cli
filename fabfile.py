@@ -1,4 +1,7 @@
 from fabric.api import *
+from armstrong.dev.tasks import test
+
+full_name = "armstrong.cli"
 
 
 @task

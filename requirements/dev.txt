@@ -3,3 +3,4 @@ armstrong.apps.articles
 armstrong.apps.images
 armstrong.apps.related_content
 fabric
+armstrong.dev>=1.8.1

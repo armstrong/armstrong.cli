@@ -6,6 +6,7 @@ import shutil
 import codecs
 import json
 import argparse
+from random import choice
 
 CWD = os.getcwd()
 
@@ -43,9 +44,14 @@ class InitCommand(object):
         # TODO: allow this to be passed in via command line
         project_name = os.path.basename(path)
 
+        # The secret key generate is borrowed directly from Django's startproject
+        CHOICES = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
+        secret_key = ''.join([choice(CHOICES) for i in range(50)])
         context = Context({
             "project_name": project_name,
-            "demo": demo})
+            "demo": demo,
+            "secret_key": secret_key,
+        })
 
         if not os.path.exists(path):
             os.mkdir(path)
