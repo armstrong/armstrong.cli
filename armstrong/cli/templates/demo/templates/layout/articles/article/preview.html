@@ -1,0 +1,13 @@
+{% load related_content %}
+<div class='article'>
+    <span style="font-size: x-large;"><b>{{ object.title }}</b></span>
+    <div style='float:right; margin:10px'>
+        {% lead_art object 'article_small' %}
+    </div>
+    {% autoescape off %}
+    <p>
+        {{ object.summary }}
+    </p>
+    {% endautoescape %}
+    <div style="clear:both"></div>
+</div>
