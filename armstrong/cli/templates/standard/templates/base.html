@@ -61,14 +61,14 @@ This is based on Skeleton (getskeleton.com)
         </header>
 
         <section class="row">
-            <section class="one-third column">
+            <section class="four columns">
                 {% block sidemenu %}
                 <a href='{% url front_page %}'>Home</a>
                 {% section_menu section_view='section_view' %}
                 {% endblock %}
             </section>
 
-            <section id="content" class="two-thirds column">
+            <section id="content" class="twelve columns">
                 {% block content %}
                 {% endblock %}
             </section>
