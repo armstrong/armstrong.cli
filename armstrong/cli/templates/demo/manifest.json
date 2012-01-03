@@ -1,0 +1,8 @@
+{
+  "templated": {
+    "include": [
+        "settings\/",
+        "urls\/"
+    ]
+  }
+}

@@ -6,13 +6,17 @@ import shutil
 import codecs
 import json
 import argparse
+from random import choice
 
 CWD = os.getcwd()
 
+
 class InitCommand(object):
     """Initialize a new Armstrong project"""
+
     def build_parser(self, parser):
-        parser.description='Initialize a new Armstrong project from a template'
+        parser.description = \
+                'Initialize a new Armstrong project from a template'
         parser.add_argument('--demo', action='store_true',
                 help='install demo data and media assets')
         parser.add_argument('--template', default='standard',
@@ -40,9 +44,13 @@ class InitCommand(object):
         # TODO: allow this to be passed in via command line
         project_name = os.path.basename(path)
 
+        # The secret key generate is borrowed directly from Django's startproject
+        CHOICES = 'abcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*(-_=+)'
+        secret_key = ''.join([choice(CHOICES) for i in range(50)])
         context = Context({
             "project_name": project_name,
-            "demo": demo
+            "demo": demo,
+            "secret_key": secret_key,
         })
 
         if not os.path.exists(path):
@@ -69,9 +77,6 @@ class InitCommand(object):
 
             if file_name.endswith("requirements/__init__.py"):
                 # Ignore this file, it's just here so this gets picked up
-                continue
-
-            if not demo and '/demo' in file_name:
                 continue
 
             new_file = file_name.replace(template_dir, path)

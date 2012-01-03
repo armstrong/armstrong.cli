@@ -1,13 +1,16 @@
 {
     "name": "armstrong.cli",
-    "version": "0.7.0.alpha.0",
+    "version": "1.2.0.alpha.0",
     "description": "Provides basic commands needed for Armstrong scaffolding",
     "entry_points": {
         "console_scripts": ["armstrong = armstrong.cli.main:main"],
-        "armstrong.commands": ["init = armstrong.cli.commands.init:init"]
+        "armstrong.commands": [
+            "init = armstrong.cli.commands.init:init",
+            "list_templates = armstrong.cli.commands.list_templates:command"
+        ]
     },
     "install_requires": [
-        "argparse"
+        "argparse==1.2.1"
     ]
 
 }

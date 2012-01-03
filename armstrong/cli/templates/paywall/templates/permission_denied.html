@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block header %}
+    <h1>Welcome to Armstrong!</h1>
+{% endblock %}
+
+{% block content %}
+    <h4>{{ object.title }}</h4>
+    <div class="byline">{{ object.authors }} - {{ object.pub_date }}</div>
+    {% autoescape off %}
+    <div class="story">{{ object.summary }} ...</div>
+    <div class="permission_denied">The rest of this article is for subscribers
+        only. To access it,
+        <a href='{% url login %}?next={{ object.get_absolute_url }}'>
+            login with username: 'user' and password: 'user'</a></div>
+    {% endautoescape %}
+{% endblock %}
+
