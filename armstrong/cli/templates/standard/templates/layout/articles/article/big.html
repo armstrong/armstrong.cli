@@ -1,7 +1,13 @@
-<article>
+{% load related_content %}
+<article class="big clearfix">
     <h2>{{ object.title }}</h2>
     {% autoescape off %}
-    <p style='font-size: larger'>
+
+    <div class="image left">
+        {% lead_art object "article_half" %}
+    </div>
+
+    <p>
         {{ object.summary }}
         <a href="{% url article_detail slug=object.slug %}">Show more</a>
     </p>

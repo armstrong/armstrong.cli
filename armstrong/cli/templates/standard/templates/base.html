@@ -28,6 +28,21 @@ This is based on Skeleton (getskeleton.com)
     <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/skeleton.css">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/layout.css">
+    <style>
+        .container .half.column {
+            width: 50%;
+        }
+
+        .container article .image { margin: 0 0 20px 0;}
+        .container article .image.left { margin: 4px 20px 20px 0; float: left; }
+        .container article .image.right { margin: 4px 0 20px 20px; float: right; }
+
+        .container article.half .image.left { margin: 5px 10px 20px 0; }
+        .container article.half .image.right { margin: 5px 0 20px 10px; }
+
+        article.big p { font-size: larger; }
+        article.half p { font-size: smaller; }
+    </style>
 
     <!-- Favicons
     ================================================== -->

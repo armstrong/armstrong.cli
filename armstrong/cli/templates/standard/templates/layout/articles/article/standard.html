@@ -1,5 +1,11 @@
-<article>
+{% load related_content %}
+<article class="clearfix">
     <h4>{{ object.title }}</h4>
+
+    <div class="image left">
+        {% lead_art object "article_small" %}
+    </div>
+
     {% autoescape off %}
     <p>
         {{ object.summary }}
