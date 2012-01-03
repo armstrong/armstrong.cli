@@ -81,5 +81,10 @@ This is based on Skeleton (getskeleton.com)
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}javascript/jquery-1.7.1.min.js"><\/script>')</script>
     <script src="{{ STATIC_URL }}javascript/jquery.masonry.min.js"></script>
+    <script>
+        $(document).ready(function() {
+          $("section#the-rest").masonry({itemSelector: "article"});
+        });
+    </script>
 </body>
 </html>
