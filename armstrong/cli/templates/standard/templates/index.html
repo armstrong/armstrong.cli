@@ -1,68 +1,15 @@
-{% comment %}
-This is based on Skeleton (getskeleton.com)
-{% endcomment %}
-<!DOCTYPE html>
-<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
-<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
-<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
-<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
-<head>
-<head>
+{% extends "base.html" %}
 
-    <!-- Basic Page Needs
-  ================================================== -->
-    <meta charset="utf-8">
-    <title>Your Armstrong Project</title>
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <!--[if lt IE 9]>
-        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
-    <![endif]-->
-
-    <!-- Mobile Specific Metas
-  ================================================== -->
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
-    <!-- CSS
-  ================================================== -->
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/skeleton.css">
-    <link rel="stylesheet" href="{{ STATIC_URL }}css/layout.css">
-
-    <!-- Favicons
-    ================================================== -->
-    <link rel="shortcut icon" href="{{ STATIC_URL }}images/favicon.ico">
-    <link rel="apple-touch-icon" href="{{ STATIC_URL }}images/apple-touch-icon.png">
-    <link rel="apple-touch-icon" sizes="72x72" href="{{ STATIC_URL }}images/apple-touch-icon-72x72.png">
-    <link rel="apple-touch-icon" sizes="114x114" href="{{ STATIC_URL }}images/apple-touch-icon-114x114.png">
-
-</head>
-
-<body>
-    <div id="container">
-
-        <header class="sixteen columns">
-            <h1>Your Armstrong Project</h1>
-        </header>
-
-        <section class="sixteen column" role="main">
-            <h2>Everything Worked!</h2>
-            <p>
-                Thanks for checking out Armstrong!  This is a static template
-                that you can edit to fit your needs, or remove entirely if you
-                want something else.
-            </p>
-            <p>
-                Please check out
-                <a href="http://github.com/armstrong/">our GitHub page</a>
-                for more information on what to do next.
-            </p>
-        </section>
-
-        <footer>
-        </footer>
-    </div> <!--! end of #container -->
-    <!-- JavaScript at the bottom for fast page loading -->
-</body>
-</html>
-
+{% block content %}
+    <h2>Everything Worked!</h2>
+    <p>
+        Thanks for checking out Armstrong!  This is a static template
+        that you can edit to fit your needs, or remove entirely if you
+        want something else.
+    </p>
+    <p>
+        Please check out
+        <a href="http://github.com/armstrong/">our GitHub page</a>
+        for more information on what to do next.
+    </p>
+{% endblock %}
