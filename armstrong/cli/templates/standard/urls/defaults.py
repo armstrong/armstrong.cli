@@ -35,6 +35,17 @@ urlpatterns = patterns('',
     # Load the Armstrong "success" page by default
     url(r'^$', TemplateView.as_view(template_name="index.html")),
 
+    # ## Creating a standard "front page"
+    #
+    # Below is an example of an adhoc QuerySetBackedWellView.  You should
+    # uncomment it if you used `armstrong load_demo_data` to create your
+    # initial data set.
+    #
+    # url(r'^$',
+    #         QuerySetBackedWellView.as_view(well_title="Front Page",
+    #                 template_name="index.html", queryset=Article.published.all()),
+    #         name="home"),
+
     url(r'^section/(?P<full_slug>[-\w/]+)',
             SimpleSectionView.as_view(template_name='section.html'),
             name='section_view'),
