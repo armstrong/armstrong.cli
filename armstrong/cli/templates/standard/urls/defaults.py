@@ -33,7 +33,7 @@ urlpatterns = patterns('',
             {'document_root': settings.MEDIA_ROOT}),
 
     # Load the Armstrong "success" page by default
-    url(r'^$', TemplateView.as_view(template_name="index.html")),
+    url(r'^$', TemplateView.as_view(template_name="index.html"), name="home"),
 
     # ## Creating a standard "front page"
     #
