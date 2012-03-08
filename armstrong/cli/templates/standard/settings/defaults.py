@@ -1,6 +1,4 @@
 # Django settings for {{ project_name }} project.
-import os
-
 from .helpers import project_dir
 
 
