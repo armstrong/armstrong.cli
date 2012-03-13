@@ -2,11 +2,6 @@ armstrong.cli
 =============
 Provides basic commands needed for Armstrong scaffolding
 
-
-.. warning:: This is development level software.  Please do not unless you are
-             familiar with what that means and are comfortable using that type
-             of software.
-
 Usage
 -----
 
