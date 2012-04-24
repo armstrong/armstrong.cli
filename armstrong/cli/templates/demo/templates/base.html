@@ -12,26 +12,28 @@ This is based on Skeleton (getskeleton.com)
     <!-- Basic Page Needs
   ================================================== -->
     <meta charset="utf-8">
-    <title>Your Armstrong Project</title>
+    <title>{% block title %}Your Armstrong Project{% endblock %}</title>
     <meta name="description" content="">
     <meta name="author" content="">
     <!--[if lt IE 9]>
         <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
     <![endif]-->
 
+    {% block extra_head %}
     <!-- Mobile Specific Metas
   ================================================== -->
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    {% endblock %}
 
+    {% block css %}
     <!-- CSS
   ================================================== -->
     <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/skeleton.css">
     <link rel="stylesheet" href="{{ STATIC_URL }}css/layout.css">
+
+    {% comment %}TODO: Remove these styles {% endcomment %}
     <style>
-        .container .half.column {
-            width: 50%;
-        }
 
         .container article .image { margin: 0 0 20px 0;}
         .container article .image.left { margin: 4px 20px 20px 0; float: left; }
@@ -43,20 +45,21 @@ This is based on Skeleton (getskeleton.com)
         article.big p { font-size: larger; }
         article.half p { font-size: smaller; }
     </style>
+    {% endblock %}
 
+    {% block favicons %}
     <!-- Favicons
     ================================================== -->
     <link rel="shortcut icon" href="{{ STATIC_URL }}images/favicon.ico">
     <link rel="apple-touch-icon" href="{{ STATIC_URL }}images/apple-touch-icon.png">
     <link rel="apple-touch-icon" sizes="72x72" href="{{ STATIC_URL }}images/apple-touch-icon-72x72.png">
     <link rel="apple-touch-icon" sizes="114x114" href="{{ STATIC_URL }}images/apple-touch-icon-114x114.png">
+    {% endblock %}
 
 </head>
 
 <body>
-
     <div class="container">
-
         <header class="sixteen columns row">
             {% block header %}
                 <h1>Welcome to Armstrong!</h1>
@@ -64,25 +67,33 @@ This is based on Skeleton (getskeleton.com)
         </header>
 
         <section class="row">
-            <section class="one-third column">
+            <section class="four columns">
                 {% block sidemenu %}
-                <a href='{% url front_page %}'>Home</a>
+                <a href='{% url home %}'>Home</a>
                 {% section_menu section_view='section_view' %}
                 {% endblock %}
             </section>
 
-            <section id="content" class="two-thirds column">
+            <section id="content" class="twelve columns">
                 {% block content %}
                 {% endblock %}
             </section>
         </section>
-
     </div>
-    <!-- JavaScript at the bottom for fast page loading -->
 
+    {% block scripts %}
+    <!-- JavaScript at the bottom for fast page loading -->
     <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}javascript/jquery-1.7.1.min.js"><\/script>')</script>
     <script src="{{ STATIC_URL }}javascript/jquery.masonry.min.js"></script>
+    <script>
+        $(document).ready(function() {
+          {% block scripts_on_ready %}
+          $("section#the-rest").masonry({itemSelector: "article"});
+          {% endblock %}
+        });
+    </script>
+    {% endblock %}
 </body>
 </html>

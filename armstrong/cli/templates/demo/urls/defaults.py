@@ -15,6 +15,7 @@ ADMIN_BASE = "admin"
 from armstrong import hatband as admin
 admin.autodiscover()
 
+# TODO: Document why this is here
 from .utils import get_url_for_model
 
 urlpatterns = patterns('',
@@ -31,13 +32,17 @@ urlpatterns = patterns('',
     url(r'^media/(?P<path>.*)$', 'django.views.static.serve',
             {'document_root': settings.MEDIA_ROOT}),
 
-    # Below is an example well view that might be used to display a well named
-    # 'front_page' allowing for placement of content on the home page.  The view
-    # works so long as there is a well with the title ``front_page`` present.
-    url(r'^$', QuerySetBackedWellView.as_view(well_title='front_page',
-                                              template_name="front_page.html",
-                                              queryset=Article.published.all()),
-        name='front_page'),
+    # ## Creating a standard "front page"
+    #
+    # Below is an example of an adhoc QuerySetBackedWellView.  You should
+    # uncomment it if you used `armstrong load_demo_data` to create your
+    # initial data set.
+    #
+    url(r'^$',
+            QuerySetBackedWellView.as_view(well_title="front_page",
+                    allow_empty=True, template_name="index.html",
+                    queryset=Article.published.all()),
+            name="home"),
 
     url(r'^section/(?P<full_slug>[-\w/]+)',
             SimpleSectionView.as_view(template_name='section.html'),
@@ -53,10 +58,10 @@ urlpatterns = patterns('',
             name='all_articles_feed'),
 
     url(r'^article/(?P<slug>[-\w]+)/', object_detail, {
-                        'queryset': Article.published.all().select_subclasses(),
-                        'template_name': 'article.html',
-                        'slug_field': 'slug',
-                    },
+                'queryset': Article.published.all().select_subclasses(),
+                'template_name': 'article.html',
+                'slug_field': 'slug',
+            },
             name='article_detail'),
 )
 
