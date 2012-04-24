@@ -39,7 +39,7 @@ urlpatterns = patterns('',
     # initial data set.
     #
     url(r'^$',
-            QuerySetBackedWellView.as_view(well_title="Front Page",
+            QuerySetBackedWellView.as_view(well_title="front_page",
                     allow_empty=True, template_name="index.html",
                     queryset=Article.published.all()),
             name="home"),
