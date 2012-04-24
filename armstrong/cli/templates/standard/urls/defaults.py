@@ -58,10 +58,10 @@ urlpatterns = patterns('',
             name='all_articles_feed'),
 
     url(r'^article/(?P<slug>[-\w]+)/', object_detail, {
-                        'queryset': Article.published.all().select_subclasses(),
-                        'template_name': 'article.html',
-                        'slug_field': 'slug',
-                    },
+                'queryset': Article.published.all().select_subclasses(),
+                'template_name': 'article.html',
+                'slug_field': 'slug',
+            },
             name='article_detail'),
 )
 
