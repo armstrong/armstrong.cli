@@ -4,7 +4,6 @@ from armstrong.core.arm_sections.views import SimpleSectionView, SectionFeed
 from armstrong.apps.articles.models import Article
 from armstrong.apps.articles.views import ArticleFeed
 from django.views.generic.list_detail import object_detail
-from django.views.generic import TemplateView
 from django.conf import settings
 # ADMIN_BASE is the base URL for your Armstrong admin.  It is highly
 # recommended that you change this to a different URL unless you enforce a
