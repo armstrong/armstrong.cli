@@ -15,6 +15,7 @@ ADMIN_BASE = "admin"
 from armstrong import hatband as admin
 admin.autodiscover()
 
+# TODO: Document why this is here
 from .utils import get_url_for_model
 
 urlpatterns = patterns('',
