@@ -1,47 +1,99 @@
-{% comment %}
-This is adapted from Paul Irish's HTML5 boilerplate.
-{% endcomment %}
 {% load section_helpers %}
-<!doctype html>
-<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
-<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+{% comment %}
+This is based on Skeleton (getskeleton.com)
+{% endcomment %}
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
 <head>
-    <meta charset="utf-8">
 
-    <title>Your New Armstrong Project</title>
+    <!-- Basic Page Needs
+  ================================================== -->
+    <meta charset="utf-8">
+    <title>{% block title %}Your Armstrong Project{% endblock %}</title>
     <meta name="description" content="">
     <meta name="author" content="">
+    <!--[if lt IE 9]>
+        <script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+
+    {% block extra_head %}
+    <!-- Mobile Specific Metas
+  ================================================== -->
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    {% endblock %}
+
+    {% block css %}
+    <!-- CSS
+  ================================================== -->
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/base.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/skeleton.css">
+    <link rel="stylesheet" href="{{ STATIC_URL }}css/layout.css">
+
+    {% comment %}TODO: Remove these styles {% endcomment %}
+    <style>
+
+        .container article .image { margin: 0 0 20px 0;}
+        .container article .image.left { margin: 4px 20px 20px 0; float: left; }
+        .container article .image.right { margin: 4px 0 20px 20px; float: right; }
+
+        .container article.half .image.left { margin: 5px 10px 20px 0; }
+        .container article.half .image.right { margin: 5px 0 20px 10px; }
+
+        article.big p { font-size: larger; }
+        article.half p { font-size: smaller; }
+    </style>
+    {% endblock %}
+
+    {% block favicons %}
+    <!-- Favicons
+    ================================================== -->
+    <link rel="shortcut icon" href="{{ STATIC_URL }}images/favicon.ico">
+    <link rel="apple-touch-icon" href="{{ STATIC_URL }}images/apple-touch-icon.png">
+    <link rel="apple-touch-icon" sizes="72x72" href="{{ STATIC_URL }}images/apple-touch-icon-72x72.png">
+    <link rel="apple-touch-icon" sizes="114x114" href="{{ STATIC_URL }}images/apple-touch-icon-114x114.png">
+    {% endblock %}
+
 </head>
-<style>
-    #sidemenu {
-        float:left;
-        width:150px;
-        margin-right:15px;
-    }
-    #container {
-        float:left;
-        width:600px;
-    }
-</style>
+
 <body>
-    <header>
-        {% block header %}
-            <h1>Welcome to Armstrong!</h1>
-        {% endblock %}
-    </header>
-    <div id="sidemenu">
-        {% block sidemenu %}
-        <a href='{% url front_page %}'>Home</a>
-        {% section_menu section_view='section_view' %}
-        {% endblock %}
+    <div class="container">
+        <header class="sixteen columns row">
+            {% block header %}
+                <h1>Welcome to Armstrong!</h1>
+            {% endblock %}
+        </header>
+
+        <section class="row">
+            <section class="four columns">
+                {% block sidemenu %}
+                <a href='{% url home %}'>Home</a>
+                {% section_menu section_view='section_view' %}
+                {% endblock %}
+            </section>
+
+            <section id="content" class="twelve columns">
+                {% block content %}
+                {% endblock %}
+            </section>
+        </section>
     </div>
-    <div id="container">
-        {% block content %}
-        {% endblock %}
-    </div> <!--! end of #container -->
+
+    {% block scripts %}
     <!-- JavaScript at the bottom for fast page loading -->
+    <!-- Grab Google CDN's jQuery, with a protocol relative URL; fall back to local if offline -->
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
+    <script>window.jQuery || document.write('<script src="{{ STATIC_URL }}javascript/jquery-1.7.1.min.js"><\/script>')</script>
+    <script src="{{ STATIC_URL }}javascript/jquery.masonry.min.js"></script>
+    <script>
+        $(document).ready(function() {
+          {% block scripts_on_ready %}
+          $("section#the-rest").masonry({itemSelector: "article"});
+          {% endblock %}
+        });
+    </script>
+    {% endblock %}
 </body>
 </html>

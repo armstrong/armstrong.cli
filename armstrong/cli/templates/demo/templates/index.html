@@ -1,41 +1,25 @@
-{% comment %}
-This is adapted from Paul Irish's HTML5 boilerplate.
-{% endcomment %}
-<!doctype html>
-<!-- paulirish.com/2008/conditional-stylesheets-vs-css-hacks-answer-neither/ -->
-<!--[if lt IE 7]> <html class="no-js ie6 oldie" lang="en"> <![endif]-->
-<!--[if IE 7]>    <html class="no-js ie7 oldie" lang="en"> <![endif]-->
-<!--[if IE 8]>    <html class="no-js ie8 oldie" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
-<head>
-    <meta charset="utf-8">
+{% extends "base.html" %}
+{% load layout_helpers %}
 
-    <title>Your New Armstrong Project</title>
-    <meta name="description" content="">
-    <meta name="author" content="">
-</head>
-<body>
-  <div id="container">
-        <header>
-            <h1>Welcome to Armstrong!</h1>
-        </header>
-        <div id="main" role="main">
-            <h2>Everything Worked!</h2>
-            <p>
-                Thanks for checking out Armstrong!  This is a static template
-                that you can edit to fit your needs, or remove entirely if you
-                want something else.
-            </p>
-            <p>
-                Please check out
-                <a href="http://github.com/armstrong/">our GitHub page</a>
-                for more information on what to do next.
-            </p>
-        </div>
-        <footer>
-        </footer>
-    </div> <!--! end of #container -->
-    <!-- JavaScript at the bottom for fast page loading -->
-</body>
-</html>
+{% block content %}
+    {% comment %}
+        Note, this `if well` statement is only here to enable the
+        welcome page for an Armstrong site that does not have any
+        data in it.  For production sites, this may be unnecessary.
+    {% endcomment %}
 
+    {% if well %}
+        {% render_iter well.items|slice:":15" %}
+            {% render_next "big" %}
+            {% render_next "big" %}
+            {% render_next "standard" %}
+            {% render_next "standard" %}
+            {% render_next "standard" %}
+            <section id="the-rest">
+                {% render_remainder "half" %}
+            </section>
+        {% endrender_iter %}
+    {% else %}
+        {% include "armstrong/includes/welcome.html" %}
+    {% endif %}
+{% endblock %}

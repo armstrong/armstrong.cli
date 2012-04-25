@@ -13,3 +13,7 @@ urlpatterns += patterns('',
     # url(r'^$', '{{ project_name }}.views.debug', name='debug'),
     # url(r'^{{ project_name }}/', include('{{ project_name }}.debug.urls')),
 )
+
+# Load staticfiles for testing purposes
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+urlpatterns += staticfiles_urlpatterns()

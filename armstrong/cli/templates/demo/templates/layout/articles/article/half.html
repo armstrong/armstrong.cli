@@ -1,14 +1,11 @@
 {% load related_content %}
-<div class='article-half' style='float:left; width:45%; margin-right: 5%'>
+<article class="alpha six columns clearfix">
     <h4>{{ object.title }}</h4>
-    <div style='float:left; margin:10px'>
-        {% lead_art object 'article_small' %}
-    </div>
+
     {% autoescape off %}
-    <p style='font-size: smaller'>
+    <p>
         {{ object.summary }}
         <a href="{% url article_detail slug=object.slug %}">Show more</a>
     </p>
     {% endautoescape %}
-    <div style="clear:both"></div>
-</div>
+</article>

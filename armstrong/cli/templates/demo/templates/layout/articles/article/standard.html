@@ -1,14 +1,15 @@
 {% load related_content %}
-<div class='article'>
+<article class="clearfix">
     <h4>{{ object.title }}</h4>
-    <div style='float:left; margin:10px'>
-        {% lead_art object 'article_small' %}
+
+    <div class="image left">
+        {% lead_art object "article_small" %}
     </div>
+
     {% autoescape off %}
     <p>
-        {{ object.summary }} 
+        {{ object.summary }}
         <a href="{% url article_detail slug=object.slug %}">Show more</a>
     </p>
     {% endautoescape %}
-    <div style="clear:both"></div>
-</div>
+</article>
